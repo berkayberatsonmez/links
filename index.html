@@ -21,7 +21,6 @@
       overflow-x: hidden;
     }
 
-    /* ── Yıldız alanı ── */
     #stars-canvas {
       position: fixed;
       inset: 0;
@@ -29,7 +28,6 @@
       z-index: 0;
     }
 
-    /* ── Arka plan ışıma ── */
     .bg-glow {
       position: fixed;
       top: -20vh;
@@ -42,7 +40,34 @@
       z-index: 0;
     }
 
-    /* ── Kart ── */
+    /* ── Dil toggle ── */
+    .lang-toggle {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 10;
+      display: flex;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: rgba(200,180,255,0.5);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: all 0.2s ease;
+    }
+    .lang-btn.active {
+      background: rgba(212, 170, 50, 0.2);
+      color: #d4aa32;
+    }
+
     .card {
       position: relative;
       z-index: 1;
@@ -52,10 +77,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0;
     }
 
-    /* ── Logo ── */
     .logo-wrap {
       width: 88px;
       height: 88px;
@@ -76,7 +99,6 @@
       50%       { transform: translateY(-8px); }
     }
 
-    /* ── Başlık ── */
     .app-name {
       font-family: 'Cinzel', serif;
       font-size: 22px;
@@ -94,9 +116,10 @@
       color: rgba(200, 170, 240, 0.75);
       letter-spacing: 0.5px;
       margin-bottom: 36px;
+      text-align: center;
+      line-height: 1.5;
     }
 
-    /* ── Ayraç ── */
     .divider {
       width: 100%;
       display: flex;
@@ -117,7 +140,6 @@
       text-transform: uppercase;
     }
 
-    /* ── Linkler ── */
     .links {
       width: 100%;
       display: flex;
@@ -139,20 +161,9 @@
       position: relative;
       overflow: hidden;
     }
-
-    .link-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 0.18s ease;
-    }
-
     .link-btn:hover { transform: translateY(-2px); }
-    .link-btn:hover::before { opacity: 1; }
     .link-btn:active { transform: scale(0.98); }
 
-    /* İndir butonları — öne çıkan */
     .btn-store {
       background: linear-gradient(135deg, rgba(212, 170, 50, 0.12), rgba(180, 130, 20, 0.08));
       border-color: rgba(212, 170, 50, 0.35);
@@ -163,7 +174,6 @@
       box-shadow: 0 8px 32px rgba(212, 170, 50, 0.18);
     }
 
-    /* Sosyal medya butonları */
     .btn-social {
       background: rgba(255, 255, 255, 0.04);
       border-color: rgba(255, 255, 255, 0.08);
@@ -184,16 +194,13 @@
       font-size: 20px;
       flex-shrink: 0;
     }
-
     .btn-appstore .btn-icon  { background: rgba(0, 122, 255, 0.15); }
     .btn-playstore .btn-icon { background: rgba(52, 168, 83, 0.15); }
     .btn-tiktok .btn-icon    { background: rgba(255, 0, 80, 0.12); }
     .btn-instagram .btn-icon { background: rgba(225, 48, 108, 0.12); }
     .btn-youtube .btn-icon   { background: rgba(255, 0, 0, 0.12); }
 
-    .btn-text {
-      flex: 1;
-    }
+    .btn-text { flex: 1; }
     .btn-label {
       display: block;
       font-size: 14.5px;
@@ -218,7 +225,6 @@
       color: rgba(212, 170, 50, 0.8);
     }
 
-    /* Store grubu başlığı */
     .section-label {
       width: 100%;
       font-size: 10px;
@@ -228,10 +234,8 @@
       margin-bottom: 4px;
       padding-left: 4px;
     }
-
     .gap-top { margin-top: 8px; }
 
-    /* ── Alt yazı ── */
     .footer {
       margin-top: 36px;
       font-size: 11px;
@@ -245,43 +249,45 @@
   <canvas id="stars-canvas"></canvas>
   <div class="bg-glow"></div>
 
+  <!-- Dil Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('tr')" id="btn-tr">TR</button>
+    <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+  </div>
+
   <div class="card">
     <div class="logo-wrap">🌙</div>
     <div class="app-name">Dream AI</div>
-    <div class="app-tagline">Rüyalarının sırrını çöz — Bilinçaltın sana bir şey söylüyor</div>
+    <div class="app-tagline" id="tagline">Rüyalarının sırrını çöz — Bilinçaltın sana bir şey söylüyor</div>
 
-    <div class="divider"><span>✦ İndir ✦</span></div>
+    <div class="divider"><span id="divider-text">✦ İndir ✦</span></div>
 
     <div class="links">
 
-      <!-- App Store -->
       <a class="link-btn btn-store btn-appstore"
          href="https://apps.apple.com/tr/app/dream-ai-r%C3%BCya-tabiri/id6760260260?l=tr"
          target="_blank" rel="noopener">
         <div class="btn-icon">🍎</div>
         <div class="btn-text">
           <span class="btn-label">App Store</span>
-          <span class="btn-sublabel">iPhone & iPad için indir</span>
+          <span class="btn-sublabel" id="sub-appstore">iPhone & iPad için indir</span>
         </div>
         <span class="btn-arrow">›</span>
       </a>
 
-      <!-- Play Store -->
       <a class="link-btn btn-store btn-playstore"
          href="https://play.google.com/store/apps/details?id=com.ruyatabircisi.ai"
          target="_blank" rel="noopener">
         <div class="btn-icon">▶</div>
         <div class="btn-text">
           <span class="btn-label">Google Play</span>
-          <span class="btn-sublabel">Android için indir</span>
+          <span class="btn-sublabel" id="sub-playstore">Android için indir</span>
         </div>
         <span class="btn-arrow">›</span>
       </a>
 
-      <!-- Sosyal medya -->
-      <div class="section-label gap-top">✦ Bizi takip et</div>
+      <div class="section-label gap-top" id="follow-label">✦ Bizi takip et</div>
 
-      <!-- TikTok -->
       <a class="link-btn btn-social btn-tiktok"
          href="https://www.tiktok.com/@dreamairuyatabiri"
          target="_blank" rel="noopener">
@@ -293,7 +299,6 @@
         <span class="btn-arrow">›</span>
       </a>
 
-      <!-- Instagram -->
       <a class="link-btn btn-social btn-instagram"
          href="https://www.instagram.com/ruyatabiriai"
          target="_blank" rel="noopener">
@@ -305,7 +310,6 @@
         <span class="btn-arrow">›</span>
       </a>
 
-      <!-- YouTube -->
       <a class="link-btn btn-social btn-youtube"
          href="https://youtube.com/@dreamairuya"
          target="_blank" rel="noopener">
@@ -323,7 +327,46 @@
   </div>
 
   <script>
-    // Yıldız animasyonu
+    const strings = {
+      tr: {
+        tagline:      "Rüyalarının sırrını çöz — Bilinçaltın sana bir şey söylüyor",
+        divider:      "✦ İndir ✦",
+        subAppstore:  "iPhone & iPad için indir",
+        subPlaystore: "Android için indir",
+        followLabel:  "✦ Bizi takip et",
+      },
+      en: {
+        tagline:      "Unlock the secrets of your dreams — Your subconscious is speaking",
+        divider:      "✦ Download ✦",
+        subAppstore:  "Download for iPhone & iPad",
+        subPlaystore: "Download for Android",
+        followLabel:  "✦ Follow us",
+      }
+    };
+
+    function setLang(lang) {
+      const s = strings[lang];
+      document.getElementById('tagline').textContent       = s.tagline;
+      document.getElementById('divider-text').textContent  = s.divider;
+      document.getElementById('sub-appstore').textContent  = s.subAppstore;
+      document.getElementById('sub-playstore').textContent = s.subPlaystore;
+      document.getElementById('follow-label').textContent  = s.followLabel;
+      document.getElementById('btn-tr').classList.toggle('active', lang === 'tr');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang;
+
+      // App Store linkini dile göre değiştir
+      const appStoreLink = document.querySelector('.btn-appstore');
+      appStoreLink.href = lang === 'en'
+        ? 'https://apps.apple.com/app/dream-ai-r%C3%BCya-tabiri/id6760260260'
+        : 'https://apps.apple.com/tr/app/dream-ai-r%C3%BCya-tabiri/id6760260260?l=tr';
+    }
+
+    // Tarayıcı diline göre otomatik seç
+    const browserLang = navigator.language?.startsWith('tr') ? 'tr' : 'en';
+    setLang(browserLang);
+
+    // ── Yıldız animasyonu ──
     const canvas = document.getElementById('stars-canvas');
     const ctx = canvas.getContext('2d');
     let stars = [];
@@ -361,15 +404,12 @@
       });
     }
 
-    let raf;
-    function animate(t) {
-      drawStars(t / 1000);
-      raf = requestAnimationFrame(animate);
-    }
-
     resize();
     initStars();
-    requestAnimationFrame(animate);
+    requestAnimationFrame(function animate(t) {
+      drawStars(t / 1000);
+      requestAnimationFrame(animate);
+    });
     window.addEventListener('resize', () => { resize(); initStars(); });
   </script>
 </body>
