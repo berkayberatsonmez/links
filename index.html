@@ -30,7 +30,6 @@
     min-height: 100vh;
   }
 
-  /* Starfield */
   .stars {
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
     background-image:
@@ -52,7 +51,6 @@
     padding: 32px 20px 80px;
   }
 
-  /* Lang toggle */
   .lang-toggle {
     position: absolute; top: 24px; right: 24px;
     display: flex; gap: 8px; z-index: 10;
@@ -69,13 +67,14 @@
     background: var(--accent); border-color: var(--accent);
   }
 
-  /* Hero */
   .hero { text-align: center; padding: 80px 0 48px; }
   .logo {
-    font-size: 72px; margin-bottom: 16px;
+    margin-bottom: 16px;
     filter: drop-shadow(0 0 24px rgba(168,85,247,0.6));
     animation: float 6s ease-in-out infinite;
+    display: flex; justify-content: center;
   }
+  .logo svg { width: 72px; height: 72px; }
   @keyframes float {
     0%,100% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
@@ -97,7 +96,6 @@
     line-height: 1.5;
   }
 
-  /* Store buttons */
   .stores {
     display: flex; gap: 16px; justify-content: center;
     flex-wrap: wrap; margin-bottom: 64px;
@@ -117,9 +115,8 @@
     border-color: var(--accent);
     box-shadow: 0 8px 24px rgba(168,85,247,0.25);
   }
-  .store-btn .icon { font-size: 22px; }
+  .store-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
 
-  /* Features */
   .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -137,14 +134,19 @@
     transform: translateY(-4px);
     background: rgba(168,85,247,0.08);
   }
-  .feature .emoji { font-size: 40px; margin-bottom: 12px; display: block; }
+  .feature .icon {
+    width: 48px; height: 48px; margin: 0 auto 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(168,85,247,0.15);
+    border-radius: 14px;
+  }
+  .feature .icon svg { width: 28px; height: 28px; }
   .feature h3 {
     font-size: 19px; font-weight: 700;
     color: var(--accent-2); margin-bottom: 8px;
   }
   .feature p { color: var(--muted); font-size: 14px; line-height: 1.6; }
 
-  /* Social */
   .social {
     display: flex; gap: 16px; justify-content: center;
     flex-wrap: wrap; padding-top: 24px;
@@ -174,35 +176,71 @@
 
 <div class="container">
   <section class="hero">
-    <div class="logo">🌙</div>
+    <div class="logo">
+      <!-- Moon icon -->
+      <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M54 38.5C51.5 50.5 40.5 59 28 57C15.5 55 7 44.5 9 32C11 19.5 22 11 34.5 13C27 18 23 26.5 25 35.5C27 44.5 35.5 51 45 50C48.5 49.5 51.5 48 54 46C54.5 43.5 54.5 41 54 38.5Z" fill="#c084fc" stroke="#a855f7" stroke-width="2"/>
+        <circle cx="55" cy="18" r="3" fill="#e9d5ff" opacity="0.8"/>
+        <circle cx="62" cy="28" r="2" fill="#e9d5ff" opacity="0.6"/>
+        <circle cx="48" cy="12" r="1.5" fill="#e9d5ff" opacity="0.7"/>
+      </svg>
+    </div>
     <h1>PYTHIA</h1>
     <p class="tagline" id="tagline">
       Rüyalarının sırrını çöz, kartların rehberliğini al, yıldızların sana ne söylediğini öğren. AI destekli rüya tabiri, tarot falı ve burç yorumu — hepsi tek uygulamada.
     </p>
 
     <div class="stores">
-      <a class="store-btn" href="https://apps.apple.com/app/id6749488277" target="_blank" rel="noopener">
-        <span class="icon">🍎</span><span id="btn-ios">App Store'da İndir</span>
+      <a class="store-btn" href="https://apps.apple.com/tr/app/pythia-r%C3%BCya-tabiri-tarot-bur%C3%A7/id6760260260" target="_blank" rel="noopener">
+        <!-- Apple logo -->
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.78 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+        </svg>
+        <span id="btn-ios">App Store'da İndir</span>
       </a>
-      <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.berkay.dream_app" target="_blank" rel="noopener">
-        <span class="icon">▶️</span><span id="btn-android">Google Play'de İndir</span>
+      <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.ruyatabircisi.ai&hl=tr" target="_blank" rel="noopener">
+        <!-- Google Play logo -->
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.18 23.76C3.06 23.68 3 23.54 3 23.36V0.64C3 0.46 3.06 0.32 3.18 0.24L3.24 0.18L13.26 10.2V10.38L3.24 20.4L3.18 23.76Z" fill="#EA4335"/>
+          <path d="M16.53 13.47L13.26 10.2V10.38L16.53 13.65L20.94 11.16C22.2 10.44 22.2 9.3 20.94 8.58L16.53 13.47Z" fill="#FBBC04"/>
+          <path d="M16.53 13.47L13.26 10.2L3.18 0.24C3.54 0.06 4.02 0.12 4.5 0.42L16.53 7.35L13.26 10.2L16.53 13.47Z" fill="#4285F4"/>
+          <path d="M16.53 13.47L4.5 20.4C4.02 20.7 3.54 20.76 3.18 20.58L13.26 10.38L16.53 13.47Z" fill="#34A853"/>
+        </svg>
+        <span id="btn-android">Google Play'de İndir</span>
       </a>
     </div>
   </section>
 
   <section class="features">
     <div class="feature">
-      <span class="emoji">🌙</span>
+      <div class="icon">
+        <!-- Moon/dream icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </div>
       <h3 id="f1-title">Rüya Tabiri</h3>
       <p id="f1-desc">Gördüğün rüyayı yaz, bilinçaltının sana ne söylediğini AI ile saniyeler içinde öğren.</p>
     </div>
     <div class="feature">
-      <span class="emoji">🔮</span>
+      <div class="icon">
+        <!-- Star/tarot icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      </div>
       <h3 id="f2-title">Tarot Falı</h3>
       <p id="f2-desc">Kartlarını seç, aşk · kariyer · gelecek sorularına kişisel yanıtlar al.</p>
     </div>
     <div class="feature">
-      <span class="emoji">⭐</span>
+      <div class="icon">
+        <!-- Zodiac/horoscope icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
       <h3 id="f3-title">Burç Yorumu</h3>
       <p id="f3-desc">Günlük burç yorumların, astrolojik geçişler ve kişiye özel yıldız rehberliği.</p>
     </div>
